@@ -30,6 +30,8 @@ use App\Models\leaders;
 use OneSignal;
 use Image;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\Http;
+
 
 
 
@@ -2136,9 +2138,12 @@ class UserController extends Controller
         }
 
         $url = 'https://ippocloud.com/api/v1/plans/mobile/prepaid-plans';
+    $apiKey = env('IPPOCLOUD_API_KEY');
+    $secretKey = env('IPPOCLOUD_SECRET_KEY');
+    $authorization = 'Basic ' . base64_encode("$apiKey:$secretKey");
 
         $response = Http::withHeaders([
-            'Authorization' => 'Basic ' . config('services.ippocloud.auth'), // Move key to config
+            'Authorization' => $authorization, // Move key to config
             'Content-Type' => 'application/json',
         ])->post($url, [
                     'operator_code' => $operatorCode,
