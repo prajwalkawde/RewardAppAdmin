@@ -77,6 +77,11 @@ Route::post('ag', [UserController::class, 'ag']);
 Route::post('delete', [UserController::class, 'delete']);
 
 Route::get('test__', [UserController::class, 'test__']);
+// Recharge api
+Route::post('/get-prepaid-plans', [UserController::class, 'getPrepaidPlans']);
+Route::post('/recharge/mobile', [UserController::class, 'mobileRecharge']);
+// Google play voucher code api
+Route::post('/voucher/google-play', [UserController::class, 'googlePlayVoucher']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
